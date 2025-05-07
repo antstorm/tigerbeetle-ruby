@@ -153,10 +153,9 @@ module TigerBeetle
 
     def callback(client_id, packet, timestamp, result_ptr, result_len)
       request_id = packet[:user_data].read_uint64
-      request = inflight_requests[request_id]
+      request = inflight_requests.delete(request_id)
       result = deserialize(result_ptr, request.converter, result_len)
       request.block.call(result)
-      inflight_requests.delete(request_id)
     end
 
     def submit_request(operation, request, request_converter, response_converter, &block)
