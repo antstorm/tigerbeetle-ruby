@@ -1,5 +1,7 @@
+TB_CLIENT_DIR = './ext/tb_client'.freeze
+
 task :compile do
-  cd 'ext/tb_client' do
+  cd TB_CLIENT_DIR do
     ruby 'extconf.rb'
     sh 'make clean'
     sh 'make'
@@ -7,8 +9,14 @@ task :compile do
   end
 end
 
+task :clean do
+  cd TB_CLIENT_DIR do
+    sh 'rm -rf ./pkg'
+  end
+end
+
 task package: [:compile] do
-  cd 'ext/tb_client' do
+  cd TB_CLIENT_DIR do
     sh 'tar -czf pkg.tar.gz -C ./pkg .'
   end
 end
