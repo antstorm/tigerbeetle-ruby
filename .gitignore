@@ -1,5 +1,6 @@
 .bundle/
 Gemfile.lock
+.gems
 
 ext/tb_client/Makefile
 ext/tb_client/pkg/
