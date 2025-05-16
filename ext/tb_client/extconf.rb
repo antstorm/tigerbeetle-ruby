@@ -3,6 +3,7 @@ require 'mkmf'
 
 makefile_path = File.join('Makefile')
 client_version = '0.16.40'
+min_client_version = '0.16.37'
 tar_package = 'pkg.tar.gz'
 
 makefile = ''
@@ -12,7 +13,7 @@ if find_executable('zig') && File.exist?('./tigerbeetle/build.zig')
     all:
     \techo "Compiling native TB client from the source"
     \tzig version
-    \tunset -v DESTDIR && cd ./tigerbeetle && zig build clients:c -Dconfig-release=#{client_version} -Dconfig-release-client-min=#{client_version}
+    \tunset -v DESTDIR && cd ./tigerbeetle && zig build clients:c -Dconfig-release=#{client_version} -Dconfig-release-client-min=#{min_client_version}
     \n\n
     install:
     \tcp -rf ./tigerbeetle/src/clients/c/lib ./pkg
