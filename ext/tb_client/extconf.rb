@@ -2,7 +2,7 @@
 require 'mkmf'
 
 makefile_path = File.join('Makefile')
-client_version = '0.16.41'
+client_version = '0.16.42'
 min_client_version = '0.16.37'
 tar_package = 'pkg.tar.gz'
 
