@@ -60,6 +60,13 @@ account_2.credits_posted # 999
 *More information on the `ledger` and `code` attributes can be found
 [here](https://docs.tigerbeetle.com/coding/data-modeling/).*
 
+### Connecting to a cluster
+
+When connecting to a TigerBeetle cluster (multiple replicas) you need to specify all the replica
+addresses ordered and separated by a comma, e.g. `127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002`.
+
+*NOTE: Currently TigerBeetle does not support domain names, only IPv4 addresses.*
+
 ## IDs
 
 You can choose whatever IDs you want when creating accounts and transfers (as long as they are
