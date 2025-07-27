@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 require 'mkmf'
+require_relative '../../lib/tigerbeetle/version'
 
 makefile_path = File.join('Makefile')
-client_version = '0.16.45'
+client_version = TigerBeetle::TB_VERSION
 min_client_version = '0.16.4'
 tar_package = 'pkg.tar.gz'
 
