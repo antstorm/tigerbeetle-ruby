@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.13
+
+- Based on TigerBeetle 0.16.49
+
 ## 0.0.12
 
 - Based on TigerBeetle 0.16.48
