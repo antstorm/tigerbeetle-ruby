@@ -23,7 +23,7 @@ jobs:
     - name: Set up Zig
       uses: mlugg/setup-zig@v1
       with:
-        version: 0.13.0
+        version: 0.14.1
 
     # - name: Set up Zig
     #   run: cd ext/tb_client/tigerbeetle && ./zig/download.sh
