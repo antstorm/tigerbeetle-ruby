@@ -114,9 +114,15 @@ We'd love your help building the TigerBeetle Ruby gem.
 - For any discovered problems or questions about the Ruby client — [open a new issue](https://github.com/antstorm/tigerbeetle-ruby/issues/new)
 - For codebase improvements:
   - Fork this repo
+  - Unpack the native ext with `bundle exec rake compile`
   - Implement your changes
   - Ensure the tests pass by running `bundle exec rspec`
   - Open a new pull request
+- If you're making changes to the native code, you might need to build TigerBeetle C client
+  - Pull in the TigerBeetle submodule with `git submodule update --init --recursive --remote`
+  - Install Zig `cd ext/tb_client/tigerbeetle && zig/download.sh`
+  - Add `zig` to your PATH `export PATH=$PATH:<PATH-TO-THIS-REPO>/ext/tb_client/tigerbeetle/zig`
+  - Compile the client `bundle exec rake clean compile`
 
 
 ## License
