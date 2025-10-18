@@ -1,4 +1,4 @@
 module TigerBeetle
-  VERSION = '0.0.21'.freeze
-  TB_VERSION = '0.16.57'.freeze
+  VERSION = '0.0.22'.freeze
+  TB_VERSION = '0.16.58'.freeze
 end
