@@ -17,7 +17,7 @@ it that leverages [the native Zig client](https://tigerbeetle.com/blog/2023-02-2
 Start by adding the TigerBeetle gem to your Gemfile:
 
 ```ruby
-gem 'tigerbeeetle'
+gem 'tigerbeetle'
 ```
 
 Ensure TigerBeetle is running ([more on this](https://docs.tigerbeetle.com/start/)):
