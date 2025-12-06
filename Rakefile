@@ -12,6 +12,7 @@ end
 task :clean do
   cd TB_CLIENT_DIR do
     sh 'rm -rf ./pkg'
+    sh 'rm -f pkg.tar.gz'
   end
 end
 
