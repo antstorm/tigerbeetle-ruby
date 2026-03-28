@@ -202,7 +202,7 @@ module TigerBeetle
 
     def deserialize(ptr, converter, length)
       type = converter.native_type
-      # copy the memory own to retain the data after tb_client has freed its memory
+      # copy data to own memory to retain it after tb_client has freed its memory
       own_ptr = FFI::MemoryPointer.new(:char, type.size * length)
       own_ptr.put_bytes(0, ptr.read_bytes(type.size * length))
 
