@@ -1,4 +1,5 @@
 require_relative './lib/tigerbeetle/version'
+require_relative './lib/tigerbeetle/platforms'
 
 Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.0'
@@ -14,16 +15,32 @@ Gem::Specification.new do |spec|
   spec.license       = 'Apache-2.0'
 
   spec.require_paths = ['lib']
-  spec.extensions    = ['ext/tb_client/extconf.rb']
-  spec.files         = [
-    Dir["{lib}/**/*.*"],
-    'ext/tb_client/extconf.rb',
-    'ext/tb_client/pkg.tar.gz',
+
+  platform = ENV['TB_PLATFORM']
+  files = [
+    Dir['lib/**/*.rb'],
     'CHANGELOG.md',
     'LICENSE',
     'README.md',
     'tigerbeetle.gemspec'
   ].flatten
+
+  if platform
+    spec.platform = platform
+    native_files = TigerBeetle::PLATFORMS.fetch(platform).flat_map do |target|
+      Dir["lib/tb_client/native/#{target}/*"]
+    end
+    spec.files = files + native_files
+  else
+    ext = 'ext/tb_client/extconf.rb'
+    spec.extensions = [ext]
+    spec.files = files + [
+      ext,
+      Dir['ext/tb_client/tigerbeetle/src/**/*.{zig,c,h}'],
+      'ext/tb_client/tigerbeetle/build.zig',
+      'ext/tb_client/tigerbeetle/LICENSE'
+    ].flatten
+  end
 
   spec.add_dependency 'ffi', '~> 1.14'
 

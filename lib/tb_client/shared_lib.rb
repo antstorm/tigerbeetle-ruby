@@ -1,7 +1,8 @@
 module TBClient
   module SharedLib
     class << self
-      PKG_DIR = '../../ext/tb_client/pkg'.freeze
+      NATIVE_DIR = File.expand_path('native', __dir__).freeze
+      PKG_DIR = File.expand_path('../../ext/tb_client/pkg', __dir__).freeze
 
       def path
         prefix = ''
@@ -35,10 +36,16 @@ module TBClient
           raise "Unsupported system: #{os}"
         end
 
-        File.expand_path(
-          "#{PKG_DIR}/#{arch}-#{system}#{linux_libc}/#{prefix}tb_client#{suffix}",
-          __dir__
-        )
+        target_dir = "#{arch}-#{system}#{linux_libc}"
+        filename = "#{prefix}tb_client#{suffix}"
+
+        native_path = File.join(NATIVE_DIR, target_dir, filename)
+        return native_path if File.exist?(native_path)
+
+        pkg_path = File.join(PKG_DIR, target_dir, filename)
+        return pkg_path if File.exist?(pkg_path)
+
+        raise "tb_client library not found. Searched:\n  #{native_path}\n  #{pkg_path}"
       end
 
       private

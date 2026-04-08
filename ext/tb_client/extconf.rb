@@ -5,7 +5,6 @@ require_relative '../../lib/tigerbeetle/version'
 makefile_path = File.join('Makefile')
 client_version = TigerBeetle::TB_VERSION
 min_client_version = '0.16.4'
-tar_package = 'pkg.tar.gz'
 
 makefile = ''
 
@@ -22,18 +21,19 @@ if find_executable('zig') && File.exist?('./tigerbeetle/build.zig')
     clean:
     \trm -rf ./tigerbeetle/src/clients/c/lib
   MFILE
-elsif File.exist?("./#{tar_package}")
-  makefile = <<~MFILE
-    all:
-    \tmkdir -p pkg
-    \ttar -xzf #{tar_package} -C ./pkg
-    \n\n
-    install:
-    \techo "Installing precompiled native TB client"
-    \n\n
-    clean:
-    \techo "Nothing to clean"
-  MFILE
+else
+  puts "ERROR: Cannot compile TigerBeetle native client."
+  puts ""
+  puts "This gem requires compilation from source, but the build tools were not found."
+  puts "Requirements:"
+  puts "  - Zig compiler (https://ziglang.org/download/)"
+  puts "  - TigerBeetle source in ext/tb_client/tigerbeetle/"
+  puts "    (run: git submodule update --init --recursive)"
+  puts ""
+  puts "Alternatively, install a precompiled platform-specific gem:"
+  puts "  gem install tigerbeetle --platform ruby"
+  puts "  # or let RubyGems auto-select: gem install tigerbeetle"
+  exit 1
 end
 
 File.open(makefile_path, 'w') do |f|
