@@ -277,6 +277,7 @@ module TBClient
 
   attach_function :tb_client_init, [Client.by_ref, :pointer, :string, :uint32, :uint, :on_completion], InitStatus
   attach_function :tb_client_submit, [Client.by_ref, Packet.by_ref], ClientStatus
-  attach_function :tb_client_deinit, [Client.by_ref], ClientStatus
+  # Release the GVL during shutdown so FFI callback-runner threads can run completion/log procs.
+  attach_function :tb_client_deinit, [Client.by_ref], ClientStatus, blocking: true
   attach_function :tb_client_register_log_callback, [:log_handler, :bool], RegisterLogCallbackStatus
 end
