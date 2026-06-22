@@ -16,6 +16,16 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
+  spec.post_install_message = <<-EOS
+    BREAKING CHANGES WARNING!
+
+    Starting with the next major version this gem will get replaced with the TigerBeetle
+    team owned implementation. While it is very similar, it includes a number of breaking
+    changes. Please refer to this migration guide when updating:
+
+    https://github.com/tigerbeetle/tigerbeetle/blob/main/src/clients/ruby/docs/migration.md
+  EOS
+
   platform = ENV['TB_PLATFORM']
   files = [
     Dir['lib/**/*.rb'],
